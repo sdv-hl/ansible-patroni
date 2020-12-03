@@ -1,11 +1,12 @@
 ---
 
 - name: Install keepalived
-  yum: name={{ item }} state=latest
+  yum:
+    name:
+        - keepalived
+    state: latest
   tags: 
     - patroni
-    - keepalived
-  with_items:
     - keepalived
   when: install is defined
 

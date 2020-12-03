@@ -1,11 +1,12 @@
 ---
 
 - name: Install haproxy
-  yum: name={{ item }} state=latest
-  tags: 
+  yum:
+    name:
+        - haproxy
+    state: latest
+  tags:
     - patroni
-    - haproxy
-  with_items:
     - haproxy
   when: install is defined
 

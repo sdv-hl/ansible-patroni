@@ -6,32 +6,33 @@
   when: install is defined
   
 - name: Install PGsql12
-  yum: name={{ item }} state=latest
+  yum:
+    name:
+        - postgresql12
+        - postgresql12-contrib
+        - postgresql12-server
+        - python-psycopg2
+#       - repmgr12
+    state: latest
   tags: patroni
-  with_items:
-    - postgresql12
-    - postgresql12-contrib
-    - postgresql12-server
-    - python-psycopg2
-#    - repmgr12
   when: install is defined
 
 - name: install python packages
-  pip: name={{ item }}
+  pip:
+    name:
+        - python-etcd
+        - python-consul
+        - dnspython
+        - boto
+        - mock
+        - requests
+        - six
+        - kazoo
+        - click
+        - tzlocal
+        - prettytable
+        - PyYAML
   tags: patroni
-  with_items:
-    - python-etcd
-    - python-consul
-    - dnspython
-    - boto
-    - mock
-    - requests
-    - six
-    - kazoo
-    - click
-    - tzlocal
-    - prettytable
-    - PyYAML
   when: install is defined
 
 - name: checkout patroni
