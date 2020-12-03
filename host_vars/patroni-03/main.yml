@@ -1,0 +1,5 @@
+---
+
+patroni_node_name: patroni-03
+
+keepalived_priority: 101
