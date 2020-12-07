@@ -1,8 +1,10 @@
 name: {{ patroni_node_name }}
 scope: &scope {{ patroni_scope }}
 
-consul:
-  host: consul.services.local:8500
+#consul:
+#  host: consul.services.local:8500
+etcd:
+  hosts: 192.168.21.70:2379,192.168.21.72:2379,192.168.21.73:2379
 
 restapi:
   listen: 0.0.0.0:8008

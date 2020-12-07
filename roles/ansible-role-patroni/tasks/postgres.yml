@@ -1,9 +1,12 @@
 ---
 
 - name: Import Postgresql12 repo
-  yum: name=pgdg12 state=present
-  tags: patroni
-  when: install is defined
+  yum: 
+    name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    state: present
+  tags:
+    - patroni
+  when: install is defined and install != 1
   
 - name: Install PGsql12
   yum:
@@ -14,8 +17,20 @@
         - python-psycopg2
 #       - repmgr12
     state: latest
-  tags: patroni
-  when: install is defined
+  tags: 
+    - patroni
+  when: install is defined and install != 1
+  debugger: on_failed
+
+- name: upgrade setuptools
+  pip:
+    name:
+        - setuptools
+    extra_args: --upgrade
+  tags:
+    - patroni
+  when: install is defined and install != 1
+  debugger: on_failed
 
 - name: install python packages
   pip:
@@ -23,6 +38,8 @@
         - python-etcd
         - python-consul
         - dnspython
+        - psutil
+        - cdiff
         - boto
         - mock
         - requests
@@ -32,32 +49,45 @@
         - tzlocal
         - prettytable
         - PyYAML
-  tags: patroni
+  tags:
+    - patroni
   when: install is defined
+  debugger: on_failed
 
 - name: checkout patroni
   git: repo=https://github.com/zalando/patroni.git dest=/opt/patroni
-  tags: patroni
+  tags:
+    - patroni
   when: install is defined
-  
+
 - name: create /etc/patroni
   file: state=directory dest=/etc/patroni
-  tags: patroni
+  tags:
+    - patroni
   when: install is defined
-  
+  debugger: on_failed
+
 - name: put postgres.yml
   template: src=postgres.yml.j2 dest=/etc/patroni/postgres.yml backup=yes
-  tags: patroni
-  
+  tags:
+    - patroni
+  debugger: on_failed
+
 - name: put patroni.service systemd unit
   template: src=patroni.service dest=/etc/systemd/system/patroni.service backup=yes
-  tags: patroni
+  tags:
+    - patroni
   when: install is defined
-  
+  debugger: on_failed
+
 - name: Reload daemon definitions
   command: /usr/bin/systemctl daemon-reload
-  tags: patroni
-  
+  tags:
+    - patroni
+  debugger: on_failed
+
 - name: restart
   service: name=patroni state=restarted enabled=yes
-  tags: patroni
+  tags:
+    - patroni
+  debugger: on_failed

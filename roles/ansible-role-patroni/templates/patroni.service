@@ -16,7 +16,7 @@ Group=postgres
 # This is normally controlled by the global default set by systemd
 # StandardOutput=syslog
 
-Environment=PATH=PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/var/lib/pgsql/bin:/usr/pgsql-9.6/bin
+Environment=PATH=PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/pgsql-12/bin
 
 ExecStart=/opt/patroni/patroni.py /etc/patroni/postgres.yml
 
