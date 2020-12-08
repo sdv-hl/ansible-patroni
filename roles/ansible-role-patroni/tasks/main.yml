@@ -1,4 +1,5 @@
 
 - include: postgres.yml
+- include: patroni.yml
 - include: haproxy.yml
 - include: keepalived.yml
