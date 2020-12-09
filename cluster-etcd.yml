@@ -49,10 +49,10 @@
         state: present
         create: True
         insertafter: EOF
-    - name: "Set the ETCDCTL_API environment variable to 3"
+    - name: "Set the ETCDCTL_API environment variable"
       lineinfile:
         path: /etc/profile
-        line: export ETCDCTL_API=3
+        line: export ETCDCTL_API=2
         state: present
         create: True
         insertafter: EOF

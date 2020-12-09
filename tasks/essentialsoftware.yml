@@ -1,5 +1,11 @@
 ---
 
+- name: remove python-ldap package
+  yum:
+    name: 
+        - python-ldap
+    state: absent
+
 - name: Install essential software
   yum:
     name: 
@@ -35,10 +41,10 @@
         - git
         - python2-pip
         - python-devel
+        - openldap-devel
     state: latest
   tags: software
   debugger: on_failed
-
 
 - name: install the 'Development tools' package group
   yum:

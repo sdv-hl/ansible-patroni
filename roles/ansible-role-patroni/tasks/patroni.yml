@@ -1,42 +1,15 @@
 ---
 
-- name: upgrade setuptools
+- name: install/upgrade patroni
   pip:
     name:
-        - setuptools
-    extra_args: --upgrade
-  tags:
-    - patroni
-  when: install is defined and install != 1
-  debugger: on_failed
-
-- name: install python packages
-  pip:
-    name:
-        - python-etcd
-        - python-consul
-        - dnspython
-        - psutil
-        - cdiff
-        - boto
-        - mock
-        - requests
-        - six
-        - kazoo
-        - click
-        - tzlocal
-        - prettytable
-        - PyYAML
+        - patroni[etcd]
+    extra_args: --ignore-installed
+    state: latest
   tags:
     - patroni
   when: install is defined
   debugger: on_failed
-
-- name: checkout patroni
-  git: repo=https://github.com/zalando/patroni.git dest=/opt/patroni
-  tags:
-    - patroni
-  when: install is defined
 
 - name: create /etc/patroni
   file: state=directory dest=/etc/patroni

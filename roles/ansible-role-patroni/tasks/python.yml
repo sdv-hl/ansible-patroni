@@ -1,0 +1,61 @@
+---
+
+- name: upgrade pip
+  pip:
+    name:
+        - pip
+    extra_args: --ignore-installed
+    state: latest
+  tags:
+    - patroni
+  when: install is defined
+  debugger: on_failed
+
+- name: upgrade setuptools
+  pip:
+    name:
+        - setuptools
+    extra_args: --ignore-installed
+    state: latest
+  tags:
+    - patroni
+  when: install is defined
+  debugger: on_failed
+
+- name: install/upgrade wheel
+  pip:
+    name:
+        - wheel
+    extra_args: --ignore-installed
+    state: latest
+  tags:
+    - patroni
+  when: install is defined
+  debugger: on_failed
+
+- name: install/upgrade python packages
+  pip:
+    name:
+        - python-etcd
+        - python-consul
+        - python-ldap
+        - dnspython
+        - python-magic
+        - pyudev
+        - psutil
+        - cdiff
+        - boto
+        - mock
+        - requests
+        - six
+        - kazoo
+        - click
+        - tzlocal
+        - prettytable
+        - PyYAML
+    extra_args: --ignore-installed
+    state: latest
+  tags:
+    - patroni
+  when: install is defined
+  debugger: on_failed

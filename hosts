@@ -9,10 +9,13 @@
 pgsql:
     hosts:
         patroni-01:
+            name: patroni-01
             ansible_ssh_host: 192.168.21.70
-#        patroni-02:
-#            ansible_ssh_host: 192.168.21.72
+        patroni-02:
+            name: patroni-02
+            ansible_ssh_host: 192.168.21.72
 #        patroni-03:
+#            name: patroni-03
 #            ansible_ssh_host: 192.168.21.73
     vars:
         patroni_scope: "cluster-pgsql"
