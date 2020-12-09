@@ -32,8 +32,8 @@ etcd:
             ansible_ssh_host: 192.168.21.70
         etcd02:
             ansible_ssh_host: 192.168.21.72
-        etcd03:
-            ansible_ssh_host: 192.168.21.73
+#        etcd03:
+#            ansible_ssh_host: 192.168.21.73
 
 
 #[pgsql]
