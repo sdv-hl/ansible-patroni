@@ -50,6 +50,11 @@
 #    mode: 0700
 #  when: exists is not defined
 
+- name:
+  yum: 
+    name: https://rpmfind.net/linux/centos/7.9.2009/extras/x86_64/Packages/etcd-3.2.28-1.el7_8.x86_64.rpm
+    state: present
+
 - name: put etcd env vars script
   template: 
     src: etcd_env.sh
@@ -61,17 +66,25 @@
   debugger: on_failed
 
 - name: put etcd.service systemd unit
-  template: 
-    src: etcd.service
-    dest: /etc/systemd/system/etcd.service
+  template:
+    src: etcd.service.j2
+    dest: /usr/lib/systemd/system/etcd.service
     owner: root
     group: root
     mode: 0644
     backup: yes
   debugger: on_failed
 
+- name: create symlink for etcd.service
+  file:
+    src: /usr/lib/systemd/system/etcd.service
+    dest: /etc/systemd/system/etcd.service
+    state: link
+  debugger: on_failed
+
 - name: "Stop the etcd service"
   command: systemctl stop etcd
+
 - name: "Create a data directory"
   file:
     path: /var/lib/etcd/{{ inventory_hostname }}.etcd
