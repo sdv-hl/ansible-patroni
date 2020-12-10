@@ -3,7 +3,8 @@
 
   pre_tasks:
     - name: Setting system hostname
-      hostname: name="{{ ansible_host }}"
+      hostname: 
+        name: "{{ inventory_hostname }}"
 
     - include: tasks/essentialsoftware.yml
 #    - include: tasks/open-vm-tools.yml

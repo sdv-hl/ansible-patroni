@@ -2,5 +2,5 @@
 - include: postgres.yml
 - include: python.yml
 - include: patroni.yml
-#- include: haproxy.yml
-#- include: keepalived.yml
+- include: haproxy.yml
+- include: keepalived.yml
