@@ -5,6 +5,7 @@
     name: 
         - python-ldap
     state: absent
+  when: install is defined and install != 1
 
 - name: Install essential software
   yum:
@@ -44,9 +45,11 @@
         - openldap-devel
     state: latest
   tags: software
+  when: install is defined and install != 1
   debugger: on_failed
 
 - name: install the 'Development tools' package group
   yum:
     name: "@Development tools"
     state: present
+  when: install is defined and install != 1

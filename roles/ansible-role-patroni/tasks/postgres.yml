@@ -21,3 +21,9 @@
     - patroni
   when: install is defined and install != 1
   debugger: on_failed
+
+#- name: restart postgre
+#  service: name=postgresql-12 state=restarted enabled=yes
+#  tags:
+#    - patroni
+#  debugger: on_failed

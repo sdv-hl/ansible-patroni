@@ -15,12 +15,12 @@ pgsql:
 #        patroni-03:
 #            ansible_ssh_host: 192.168.21.73
     vars:
-        patroni_scope: "cluster-pgsql"
+        patroni_scope: "cluster_vbox"
         patroni_rest_password: qwertyuiop
         patroni_postgres_password: qwertyuiop
         patroni_replicator_password: qwertyuiop
         cluster_virtual_ip: 192.xx.xx.125
-        install: 2
+        install: 1
 
 
 etcd:

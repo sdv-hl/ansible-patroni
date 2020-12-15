@@ -4,7 +4,7 @@
   pip:
     name:
         - patroni[etcd]
-    extra_args: --ignore-installed
+#    extra_args: --ignore-installed
     state: latest
   tags:
     - patroni

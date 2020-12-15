@@ -8,7 +8,7 @@
     state: latest
   tags:
     - patroni
-  when: install is defined
+  when: install is defined and install != 1
   debugger: on_failed
 
 - name: upgrade setuptools
@@ -19,7 +19,7 @@
     state: latest
   tags:
     - patroni
-  when: install is defined
+  when: install is defined and install != 1
   debugger: on_failed
 
 - name: install/upgrade wheel
@@ -30,7 +30,7 @@
     state: latest
   tags:
     - patroni
-  when: install is defined
+  when: install is defined and install != 1
   debugger: on_failed
 
 - name: install/upgrade python packages
@@ -57,5 +57,5 @@
     state: latest
   tags:
     - patroni
-  when: install is defined
+  when: install is defined and install != 1
   debugger: on_failed
